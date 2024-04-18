@@ -1,3 +1,3 @@
 # Third-Party Components
 
-- example.org: [README.md](./example.org/README.md)
+- Minekube gate-plugin-template: [README.md](./minekube-gate-plugin-template/README.md)
