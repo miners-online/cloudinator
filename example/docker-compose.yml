@@ -1,0 +1,63 @@
+services:
+
+  luckperms-rest-api:
+    image: ghcr.io/luckperms/rest-api
+    ports:
+      - "127.0.0.1:8080:8080" # make the API endpoint accessible on http://localhost:8080
+    restart: unless-stopped
+    networks:
+      - internal
+
+    # Uncomment if your database is running on your host
+    # extra_hosts:
+    #  - "database:host-gateway"
+
+    environment:
+
+      # configure the LuckPerms standalone "plugin"
+      # https://luckperms.net/wiki/Configuration#environment-variables
+      LUCKPERMS_STORAGE_METHOD: mysql
+      LUCKPERMS_DATA_ADDRESS: database:3306
+      LUCKPERMS_DATA_DATABASE: root
+      LUCKPERMS_DATA_USERNAME: minecraft
+      LUCKPERMS_DATA_PASSWORD: passw0rd
+
+      # configure the REST API
+      # https://github.com/LuckPerms/rest-api#configuration
+      LUCKPERMS_REST_HTTP_PORT: 8080
+      LUCKPERMS_REST_AUTH: false
+  redis:
+    container_name: redis
+    image: redis:6.2-alpine
+    restart: unless-stopped
+    networks:
+      - internal
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass cSxbeBkEy2xZZa5ASUvz3xRjee2bKer6
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes: 
+      - cache:/data
+  proxy:
+    image: ghcr.io/miners-online/cloudinator:proxy-latest
+    networks:
+      - internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    ports:
+      - "25565:25565"
+    volumes:
+      - "./config.yml:/config.yml"
+  database:
+   image: mariadb:10.5.8
+   environment:
+     MYSQL_ROOT_PASSWORD: passw0rd
+     MYSQL_DATABASE: minecraft
+networks:
+  internal:
+    driver: bridge
+volumes:
+  cache:
+    driver: local
