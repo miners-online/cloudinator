@@ -3,14 +3,14 @@ package ping
 import (
 	"context"
 	"fmt"
+	"os"
+
 	"github.com/go-logr/logr"
 	. "github.com/minekube/gate-plugin-template/util"
 	"github.com/minekube/gate-plugin-template/util/mini"
 	"github.com/robinbraemer/event"
-	"go.minekube.com/common/minecraft/color"
-	c "go.minekube.com/common/minecraft/component"
-	"go.minekube.com/gate/pkg/edition/java/proto/version"
 	"go.minekube.com/gate/pkg/edition/java/proxy"
+	"gopkg.in/yaml.v3"
 )
 
 // Plugin is a ping plugin that handles ping events.
@@ -26,23 +26,44 @@ var Plugin = proxy.Plugin{
 	},
 }
 
+type MOTD struct {
+	line1 string `yaml:"line1"`
+	line2 string `yaml:"line2"`
+	line3 string `yaml:"line3"`
+}
+
 func onPing() func(*proxy.PingEvent) {
-	line2 := mini.Gradient(
-		"Join, test and extend your Gate proxy!",
-		c.Style{Bold: c.True},
-		*color.Yellow.RGB, *color.Gold.RGB, *color.Red.RGB,
+	// read the output.yaml file
+	data, err := os.ReadFile("ping.yaml")
+
+	if err != nil {
+		panic(err)
+	}
+
+	// create a person struct and deserialize the data into that struct
+	var motd MOTD
+
+	if err := yaml.Unmarshal(data, &motd); err != nil {
+		panic(err)
+	}
+
+	line1 := mini.Parse(
+		fmt.Sprintf("%s!\n", motd.line1),
 	)
 
-	return func(e *proxy.PingEvent) {
-		clientVersion := version.Protocol(e.Connection().Protocol())
-		line1 := mini.Gradient(
-			fmt.Sprintf("Hey %s user!\n", clientVersion),
-			c.Style{},
-			*color.White.RGB, *color.LightPurple.RGB,
-		)
+	line2 := mini.Parse(
+		fmt.Sprintf("%s!\n", motd.line2),
+	)
 
+	line3 := mini.Parse(
+		fmt.Sprintf("%s!\n", motd.line3),
+	)
+
+	description := Join(line1, line2, line3)
+
+	return func(e *proxy.PingEvent) {
 		p := e.Ping()
-		p.Description = Join(line1, line2)
+		p.Description = description
 		p.Players.Max = p.Players.Online + 1
 	}
 }
