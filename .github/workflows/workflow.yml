@@ -79,8 +79,8 @@ jobs:
         id: image-ref
         run: |
           REF=$(git rev-parse --short $GITHUB_SHA)
-          IMAGE=${{ env.REGISTRY }}/miners_online/cloudinator_proxy:${REF}
-          IMAGE_LATEST=${{ env.REGISTRY }}/miners_online/cloudinator_proxy:latest
+          IMAGE=${{ env.REGISTRY }}/${{ github.repository }}:proxy-${REF}
+          IMAGE_LATEST=${{ env.REGISTRY }}/${{ github.repository }}:proxy-latest
           
           echo "image=${IMAGE}" >> $GITHUB_STATE
           echo "image_latest=${IMAGE_LATEST}" >> $GITHUB_OUTPUT
