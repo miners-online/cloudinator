@@ -34,7 +34,7 @@ type MOTD struct {
 
 func onPing() func(*proxy.PingEvent) {
 	// read the output.yaml file
-	data, err := os.ReadFile("ping.yaml")
+	data, err := os.ReadFile("ping.yml")
 
 	if err != nil {
 		panic(err)
