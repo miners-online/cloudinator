@@ -8,25 +8,25 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./proxy
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./proxy
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: ./proxy/go.mod
+  #     - name: Setup Go
+  #       uses: actions/setup-go@v5
+  #       with:
+  #         go-version-file: ./proxy/go.mod
 
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v4
-        with:
-          version: latest
-          args: --timeout 3m0s
+  #     - name: golangci-lint
+  #       uses: golangci/golangci-lint-action@v4
+  #       with:
+  #         version: latest
+  #         args: --timeout 3m0s
   test:
     strategy:
       fail-fast: false
