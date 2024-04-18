@@ -14,10 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Change directory
+        run: cd proxy
+
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version-file: proxy/go.mod
+          go-version-file: go.mod
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v4
@@ -34,14 +37,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Change directory
+        run: cd proxy
+
       - name: Setup Go with cache
         uses: actions/setup-go@v5
         with:
           cache: true
-          go-version-file: proxy/go.mod
+          go-version-file: go.mod
 
       - name: Test
-        run: cd proxy && make test
+        run: make test
   build:
     if: ( github.event_name == 'push' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/') ) )
     needs:
@@ -54,6 +60,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Change directory
+        run: cd proxy
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -81,7 +90,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./proxy/Dockerfile
+          file: ./Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64,windows/amd64,windows/arm64,darwin/amd64,darwin/arm64,linux/arm/v7,linux/arm/v8,linux/s390x
           cache-from: type=registry,ref=${{ steps.image-ref.outputs.image_latest }}
@@ -100,11 +109,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Change directory
+        run: cd proxy
+
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           cache: true
-          go-version-file: proxy/go.mod
+          go-version-file: go.mod
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5
