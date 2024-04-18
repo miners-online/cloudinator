@@ -20,7 +20,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version-file: go.mod
+          go-version-file: ./proxy/go.mod
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v4
@@ -45,7 +45,7 @@ jobs:
 
         with:
           cache: true
-          go-version-file: go.mod
+          go-version-file: ./proxy/go.mod
 
       - name: Test
         run: make test
@@ -117,7 +117,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           cache: true
-          go-version-file: go.mod
+          go-version-file: ./proxy/go.mod
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5
