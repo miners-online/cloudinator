@@ -33,13 +33,6 @@ func Parse(mini string) *c.Text {
 		split := strings.Split(s, ">")
 
 		key := split[0]
-		var value string = ""
-		if len(split) > 1 {
-			value = split[1]
-		} else {
-			value = key
-			key = ""
-		}
 
 		if strings.HasPrefix(key, "/") {
 			styles = styles[:len(styles)-1]
@@ -49,7 +42,7 @@ func Parse(mini string) *c.Text {
 			styles = append(styles, newStyle)
 		}
 
-		newText := modify(key, value, &styles[len(styles)-1])
+		newText := modify(key, split[1], &styles[len(styles)-1])
 		components = append(components, newText)
 
 	}
