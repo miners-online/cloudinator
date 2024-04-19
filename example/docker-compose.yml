@@ -50,8 +50,7 @@ services:
     ports:
       - "25565:25565"
     volumes:
-      - "./config/config.yml:/gate/config.yml"
-      - "./config/ping.yml:/gate/ping.yml"
+      - "./config:/gate/config"
   database:
    image: mariadb:10.5.8
    environment:
