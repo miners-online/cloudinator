@@ -37,26 +37,29 @@ func onPing() func(*proxy.PingEvent) {
 	data, err := os.ReadFile("ping.yml")
 
 	if err != nil {
-		panic(err)
+		// panic(err)
 	}
 
 	// create a person struct and deserialize the data into that struct
 	var motd MOTD
 
 	if err := yaml.Unmarshal(data, &motd); err != nil {
-		panic(err)
+		// panic(err)
+		motd.line1 = ""
+		motd.line2 = ""
+		motd.line3 = ""
 	}
 
 	line1 := mini.Parse(
-		fmt.Sprintf("%s!\n", motd.line1),
+		fmt.Sprintf("%s\n", motd.line1),
 	)
 
 	line2 := mini.Parse(
-		fmt.Sprintf("%s!\n", motd.line2),
+		fmt.Sprintf("%s\n", motd.line2),
 	)
 
 	line3 := mini.Parse(
-		fmt.Sprintf("%s!\n", motd.line3),
+		fmt.Sprintf("%s\n", motd.line3),
 	)
 
 	description := Join(line1, line2, line3)

@@ -9,10 +9,11 @@ package mini
 
 import (
 	"fmt"
-	"go.minekube.com/common/minecraft/color"
-	c "go.minekube.com/common/minecraft/component"
 	"math"
 	"strings"
+
+	"go.minekube.com/common/minecraft/color"
+	c "go.minekube.com/common/minecraft/component"
 )
 
 // Parse takes a string as input and returns a `c.Text` object. It splits the input string by "<",
@@ -32,6 +33,10 @@ func Parse(mini string) *c.Text {
 		split := strings.Split(s, ">")
 
 		key := split[0]
+		var value string = ""
+		if len(split) > 1 {
+			value = split[1]
+		}
 		if strings.HasPrefix(key, "/") {
 			styles = styles[:len(styles)-1]
 		} else {
@@ -40,7 +45,7 @@ func Parse(mini string) *c.Text {
 			styles = append(styles, newStyle)
 		}
 
-		newText := modify(key, split[1], &styles[len(styles)-1])
+		newText := modify(key, value, &styles[len(styles)-1])
 		components = append(components, newText)
 
 	}

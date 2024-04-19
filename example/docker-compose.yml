@@ -40,7 +40,8 @@ services:
     volumes: 
       - cache:/data
   proxy:
-    image: ghcr.io/miners-online/cloudinator:proxy-latest
+    # image: ghcr.io/miners-online/cloudinator:proxy-latest
+    build: ../proxy
     networks:
       - internal
     extra_hosts:
@@ -49,8 +50,8 @@ services:
     ports:
       - "25565:25565"
     volumes:
-      - "./config/config.yml:/config.yml"
-      - "./config/ping.yml:/ping.yml"
+      - "./config/config.yml:/gate/config.yml"
+      - "./config/ping.yml:/gate/ping.yml"
   database:
    image: mariadb:10.5.8
    environment:
