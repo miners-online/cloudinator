@@ -2,7 +2,7 @@
 
 A Golang starter template for creating your awesome Minecraft proxy and extensions powered by Minekube Gate 🚀 Fork it!
 
-Source: <https://github.com/minekube/gate-plugin-template>.
+Source: <https://github.com/miners-online/Cloudinator/proxy>.
 
 License: ["./LICENSE"](./LICENSE).
 

@@ -3,7 +3,7 @@ package titlecmd
 import (
 	"context"
 	"github.com/go-logr/logr"
-	. "github.com/minekube/gate-plugin-template/util"
+	. "github.com/miners-online/Cloudinator/proxy/util"
 	"github.com/robinbraemer/event"
 	"go.minekube.com/brigodier"
 	"go.minekube.com/common/minecraft/color"

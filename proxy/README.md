@@ -16,7 +16,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/minekube/gate-plugin-template">
+  <a href="https://github.com/miners-online/Cloudinator/proxy">
     <img src="https://raw.githubusercontent.com/minekube/gate-plugin-template/main/assets/hero.png" alt="Logo" width="128" height="128">
   </a>
 
@@ -103,15 +103,15 @@ contributions you make are **greatly appreciated**.
 
 [forks-shield]: https://img.shields.io/github/forks/minekube/gate-plugin-template.svg?style=for-the-badge
 
-[forks-url]: https://github.com/minekube/gate-plugin-template/network/members
+[forks-url]: https://github.com/miners-online/Cloudinator/proxy/network/members
 
 [stars-shield]: https://img.shields.io/github/stars/minekube/gate.svg?style=for-the-badge
 
-[stars-url]: https://github.com/minekube/gate-plugin-template/stargazers
+[stars-url]: https://github.com/miners-online/Cloudinator/proxy/stargazers
 
 [issues-shield]: https://img.shields.io/github/issues/minekube/gate.svg?style=for-the-badge
 
-[issues-url]: https://github.com/minekube/gate-plugin-template/issues
+[issues-url]: https://github.com/miners-online/Cloudinator/proxy/issues
 
 [license-shield]: https://img.shields.io/github/license/minekube/gate.svg?style=for-the-badge
 

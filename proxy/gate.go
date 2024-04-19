@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/minekube/gate-plugin-template/plugins/bossbar"
-	"github.com/minekube/gate-plugin-template/plugins/globalchat"
-	"github.com/minekube/gate-plugin-template/plugins/ping"
-	"github.com/minekube/gate-plugin-template/plugins/tablist"
-	"github.com/minekube/gate-plugin-template/plugins/titlecmd"
+	"github.com/miners-online/Cloudinator/proxy/plugins/bossbar"
+	"github.com/miners-online/Cloudinator/proxy/plugins/globalchat"
+	"github.com/miners-online/Cloudinator/proxy/plugins/ping"
+	"github.com/miners-online/Cloudinator/proxy/plugins/tablist"
+	"github.com/miners-online/Cloudinator/proxy/plugins/titlecmd"
 	"go.minekube.com/gate/cmd/gate"
 	"go.minekube.com/gate/pkg/edition/java/proxy"
 )

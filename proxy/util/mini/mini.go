@@ -36,7 +36,11 @@ func Parse(mini string) *c.Text {
 		var value string = ""
 		if len(split) > 1 {
 			value = split[1]
+		} else {
+			value = key
+			key = ""
 		}
+
 		if strings.HasPrefix(key, "/") {
 			styles = styles[:len(styles)-1]
 		} else {

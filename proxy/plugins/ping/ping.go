@@ -2,12 +2,10 @@ package ping
 
 import (
 	"context"
-	"fmt"
 	"os"
 
 	"github.com/go-logr/logr"
-	. "github.com/minekube/gate-plugin-template/util"
-	"github.com/minekube/gate-plugin-template/util/mini"
+	"github.com/miners-online/Cloudinator/proxy/util/mini"
 	"github.com/robinbraemer/event"
 	"go.minekube.com/gate/pkg/edition/java/proxy"
 	"gopkg.in/yaml.v3"
@@ -20,24 +18,22 @@ var Plugin = proxy.Plugin{
 		log := logr.FromContextOrDiscard(ctx)
 		log.Info("Hello from Ping plugin!")
 
-		event.Subscribe(p.Event(), 0, onPing())
+		event.Subscribe(p.Event(), 0, onPing(log))
 
 		return nil
 	},
 }
 
 type MOTD struct {
-	line1 string `yaml:"line1"`
-	line2 string `yaml:"line2"`
-	line3 string `yaml:"line3"`
+	description string `yaml:"description"`
 }
 
-func onPing() func(*proxy.PingEvent) {
+func onPing(log logr.Logger) func(*proxy.PingEvent) {
 	// read the output.yaml file
 	data, err := os.ReadFile("ping.yml")
 
 	if err != nil {
-		// panic(err)
+		log.Error(err, "Error while reading `ping.yml`")
 	}
 
 	// create a person struct and deserialize the data into that struct
@@ -45,24 +41,14 @@ func onPing() func(*proxy.PingEvent) {
 
 	if err := yaml.Unmarshal(data, &motd); err != nil {
 		// panic(err)
-		motd.line1 = "Just another Cloudinator proxy!"
-		motd.line2 = ""
-		motd.line3 = "No ping config could be found!"
+		motd.description = "Just another Cloudinator proxy! \n No ping config could be found!"
 	}
 
-	line1 := mini.Parse(
-		fmt.Sprintf("%s\n", motd.line1),
-	)
+	log.Info(motd.description)
 
-	line2 := mini.Parse(
-		fmt.Sprintf("%s\n", motd.line2),
-	)
+	description := mini.Parse(motd.description)
 
-	line3 := mini.Parse(
-		fmt.Sprintf("%s\n", motd.line3),
-	)
-
-	description := Join(line1, line2, line3)
+	log.Info(description.Content)
 
 	return func(e *proxy.PingEvent) {
 		p := e.Ping()

@@ -1,4 +1,4 @@
-module github.com/minekube/gate-plugin-template
+module github.com/miners-online/Cloudinator/proxy
 
 go 1.22.2
 
