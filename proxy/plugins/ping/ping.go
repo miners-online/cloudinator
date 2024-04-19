@@ -45,9 +45,9 @@ func onPing() func(*proxy.PingEvent) {
 
 	if err := yaml.Unmarshal(data, &motd); err != nil {
 		// panic(err)
-		motd.line1 = ""
+		motd.line1 = "Just another Cloudinator proxy!"
 		motd.line2 = ""
-		motd.line3 = ""
+		motd.line3 = "No ping config could be found!"
 	}
 
 	line1 := mini.Parse(
