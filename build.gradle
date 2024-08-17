@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group = 'uk.minersonline.cloudinator'
+version = '1.0-SNAPSHOT'
+
+subprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url = "https://dev.ME1312.net/maven"
+        }
+        maven {
+            name = "papermc-repo"
+            url = "https://repo.papermc.io/repository/maven-public/"
+        }
+    }
+}
+

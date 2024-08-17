@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id "org.jetbrains.gradle.plugin.idea-ext" version "1.0.1"
+}
+
+group = 'uk.minersonline.cloudinator'
+version = '1.0-SNAPSHOT'
+
+dependencies {
+    compileOnly "com.velocitypowered:velocity-api:3.3.0-SNAPSHOT"
+    annotationProcessor "com.velocitypowered:velocity-api:3.3.0-SNAPSHOT"
+    implementation project(":common")
+    implementation "net.ME1312.SubData:Server:23w08b"
+}
