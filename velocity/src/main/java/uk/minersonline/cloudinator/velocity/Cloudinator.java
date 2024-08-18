@@ -51,16 +51,15 @@ public class Cloudinator {
 	}
 
 	private boolean onClientConnect(DataClient client) {
-		client.on.close(this::onClientClosed);
+		client.on.closed(pair -> onClientClosed(pair.value()));
 		return true;
 	}
 
-	private boolean onClientClosed(DataClient client) {
+	private void onClientClosed(DataClient client) {
 		for (Server server : serverManager.getServers()) {
 			if (server.getAdditionalInfo() == client) {
 				serverManager.removeServer(server);
 			}
 		}
-		return true;
 	}
 }
