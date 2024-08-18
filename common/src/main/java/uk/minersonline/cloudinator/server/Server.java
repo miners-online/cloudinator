@@ -7,6 +7,7 @@ public class Server {
 	private Object additionalInfo;
 
 	public Server(String name, String address, int port, Object additionalInfo) {
+		this.name = name;
 		this.address = address;
 		this.port = port;
 		this.additionalInfo = additionalInfo;
