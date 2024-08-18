@@ -15,9 +15,10 @@ public class Cloudinator {
 		SubDataProtocol protocol = new SubDataProtocol();
 		protocol.registerMessage("cloudinator", "add_server", AddServerMessageOut.class);
 
+		java.util.logging.Logger logger1 = java.util.logging.Logger.getLogger("Cloudinator");
 		SubDataClient client;
 		try {
-			client = protocol.open(null, InetAddress.getByName(proxyAddress), 2048, null);
+			client = protocol.open(logger1, InetAddress.getByName(proxyAddress), 2048, null);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

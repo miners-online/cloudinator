@@ -26,7 +26,7 @@ public class MinestomTestServer {
 			event.getPlayer().setRespawnPoint(spawn);
 		});
 
-		Cloudinator.init("127.0.0.1", 25565, "Lobby1", "lobby", "127.0.0.1");
+		Cloudinator.init("10.0.0.160", 25565, "Lobby1", "lobby", "10.0.0.109");
 		server.start("0.0.0.0", 25565);
 	}
 }
