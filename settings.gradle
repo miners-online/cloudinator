@@ -1,3 +1,4 @@
 rootProject.name = 'Cloudinator'
 include 'common', 'velocity'
+include 'minestom'
 
