@@ -41,17 +41,9 @@ public abstract class ServerManager {
 
 	public List<Server> findGroupByName(String groupName) {
 		if (!servers.containsKey(groupName)) {
-			addGroupIfNotExists(groupName);
+			servers.put(groupName, new ArrayList<>());
 		}
 		return servers.get(groupName);
-	}
-
-	protected void addGroupIfNotExists(String groupName) {
-		if (findGroupByName(groupName) != null) {
-			return;
-		}
-
-		servers.put(groupName, new ArrayList<>());
 	}
 
 	@Override
