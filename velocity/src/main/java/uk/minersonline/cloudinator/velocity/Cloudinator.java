@@ -41,6 +41,9 @@ public class Cloudinator {
 		java.util.logging.Logger logger1 = java.util.logging.Logger.getLogger("Cloudinator");
 		try {
 			SubDataServer server = protocol.open(logger1, null, 2048, null);
+			server.whitelist("10.0.0.109");
+			server.whitelist("10.0.0.160");
+			server.whitelist("10.0.0.12");
 			server.on.connect(this::onClientConnect);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
