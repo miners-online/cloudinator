@@ -1,8 +1,8 @@
 package uk.minersonline.cloudinator.velocity;
 
 import com.google.inject.Inject;
-import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.Subscribe;
+import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import net.ME1312.SubData.Server.DataClient;
@@ -38,9 +38,9 @@ public class Cloudinator {
 		SubDataProtocol protocol = new SubDataProtocol();
 		protocol.registerMessage("cloudinator", "add_server", new AddServerMessageIn(this.serverManager));
 
-
+		java.util.logging.Logger logger1 = java.util.logging.Logger.getLogger("Cloudinator");
 		try {
-			SubDataServer server = protocol.open(null, null, 2048, null);
+			SubDataServer server = protocol.open(logger1, null, 2048, null);
 			server.on.connect(this::onClientConnect);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
